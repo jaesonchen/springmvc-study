@@ -1,8 +1,12 @@
 package com.asiainfo.springmvc.helloworld;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +40,39 @@ import org.springframework.web.servlet.ModelAndView;
 public class HelloController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	
+    @RequestMapping(value = "/sendsms", method = RequestMethod.POST)
+    public Map<String, Object> post(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        
+        Map<String, Object> result = new HashMap<>();
+        InputStream is= null;
+        BufferedReader reader = null;
+        try {
+            StringBuilder data = new StringBuilder();
+            is = request.getInputStream();
+            if (is != null) {
+                reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                char[] buff = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = reader.read(buff)) > 0) {
+                    data.append(buff, 0, bytesRead);
+                }
+            }
+            System.out.println("接收到客户端的短信发送请求，报文：" + data.toString());
+            result.put("status", 0);
+            result.put("desc", "发送成功");
+        } catch (Exception ex) {
+            result.put("status", 1);
+            result.put("desc", "发送失败");
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException e) {}
+            }
+        }
+        return result;
+    }
 	
     //返回视图名称
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
