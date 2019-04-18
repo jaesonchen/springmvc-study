@@ -18,16 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class InterceptorController {
 
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    final Logger logger = LoggerFactory.getLogger(getClass());
     
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
         logger.debug("index() is executed!");
-
         model.put("title", "World");
         model.put("desc", "Spring mvc Hello world example!");
-
         return "index";
     }
     

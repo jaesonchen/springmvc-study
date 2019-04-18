@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
- * TODO
+ * Formatter只能将String转成成另一种java类型，Formatter适用于web层。在Spring MVC应用程序中，选择Formatter比选择Converter更合适。
+ * Printer的用处暂时未找到。
  * 
  * @author       zq
  * @date         2018年2月2日  下午3:26:45

@@ -25,6 +25,7 @@ public class AjaxController {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private static List<User> userList = new ArrayList<User>();
+	
 	{
 		userList.add(new User("chenzq", "1234", "beijing haidian"));
 		userList.add(new User("jaesonchen", "asdf", "beijing changping"));
@@ -44,8 +45,9 @@ public class AjaxController {
 		} else {
 			response.setResult("200");
 			response.setData(this.findUsers(param));
-			response.setMessage(response.getData().isEmpty() ? "No user!" : "");
+			response.setMessage(response.getData().isEmpty() ? "No user!" : response.getData().size() + " users!");
 		}
+		response.setDesc(param.toString());
 		return response;
 	}
 
@@ -62,8 +64,9 @@ public class AjaxController {
 		} else {
 			response.setResult("200");
 			response.setData(this.findUsers(param));
-			response.setMessage(response.getData().isEmpty() ? "No user!" : "");
+			response.setMessage(response.getData().isEmpty() ? "No user!" : response.getData().size() + " users!");
 		}
+		response.setDesc(param.toString() + " with private!");
 		return response;
 	}
 	

@@ -1,7 +1,7 @@
 package com.asiainfo.springmvc.ajax;
 
 /**
- * @Description: TODO
+ * @Description: @JsonView 定制返回字段
  * 
  * @author       zq
  * @date         2017年5月23日  下午9:48:30

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
- * @Description: TODO
+ * Converter是一般工具，可以将一种类型转换成另一种类型，既可以用在web层，也可以用在其它层中。
  * 
  * @author       zq
  * @date         2017年5月26日  下午10:20:54

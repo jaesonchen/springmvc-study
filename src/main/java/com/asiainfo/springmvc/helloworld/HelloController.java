@@ -35,11 +35,10 @@ import org.springframework.web.servlet.ModelAndView;
  * Copyright: 	  北京亚信智慧数据科技有限公司
  */
 @Controller
-//将当前controller中ModelMap的user属性自动存入session中
-@SessionAttributes("user")
+@SessionAttributes("user") //将当前controller中ModelMap的user属性自动存入session中
 public class HelloController {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	final Logger logger = LoggerFactory.getLogger(getClass());
 	
     @RequestMapping(value = "/sendsms", method = RequestMethod.POST)
     public Map<String, Object> post(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -58,7 +57,7 @@ public class HelloController {
                     data.append(buff, 0, bytesRead);
                 }
             }
-            System.out.println("接收到客户端的短信发送请求，报文：" + data.toString());
+            logger.info("接收到客户端的短信发送请求，报文：{}", data);
             result.put("status", 0);
             result.put("desc", "发送成功");
         } catch (Exception ex) {
@@ -79,10 +78,8 @@ public class HelloController {
     public String index(Map<String, Object> model) {
 
         logger.debug("index() is executed!");
-
         model.put("title", "World");
         model.put("desc", "Spring mvc Hello world example!");
-
         return "index";
     }
     
@@ -91,12 +88,10 @@ public class HelloController {
     public ModelAndView hello(@PathVariable("name") String name) {
 
         logger.debug("hello() is executed - $name {}", name);
-
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
         model.addObject("title", name);
         model.addObject("desc", "Spring mvc Hello world example!");
-
         return model;
     }
     
@@ -111,6 +106,7 @@ public class HelloController {
     //无返回值
     @RequestMapping(value = "/void")
     public void withoutReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        
         logger.debug("withoutReturn() is executed!");
         response.getWriter().write("Hello World!!");
     }
@@ -154,7 +150,7 @@ public class HelloController {
             @RequestHeader("Accept") String[] accept,
             @CookieValue(value="JSESSIONID", defaultValue="") String sessionId) {
         
-        logger.debug("Accept-Encoding={}\nAccept={}\nJSESSIONID={}", encoding, Arrays.toString(accept), sessionId);
+        logger.debug("\nAccept-Encoding={}\nAccept={}\nJSESSIONID={}", encoding, Arrays.toString(accept), sessionId);
         return "index";
     }
     

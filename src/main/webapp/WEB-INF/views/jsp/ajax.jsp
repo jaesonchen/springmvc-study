@@ -46,6 +46,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" id="bth-search" class="btn btn-primary btn-lg">Search</button>
+					<button type="submit" id="bth-search-private" class="btn btn-primary btn-lg">Search Private</button>
 				</div>
 			</div>
 		</form>
@@ -64,11 +65,17 @@
 
 <script>
 	jQuery(document).ready(function($) {
-		$("#search-form").submit(function(event) {
+		$("#bth-search").click(function(event) {
 			// Prevent the form from submitting via the browser.
 			event.preventDefault();
 			searchUser();
 		});
+		
+		$("#bth-search-private").click(function(event) {
+            // Prevent the form from submitting via the browser.
+            event.preventDefault();
+            searchUserPrivate();
+        });
 	});
 	
 	function searchUser() {
@@ -93,6 +100,28 @@
 		});
 	}
 
+	function searchUserPrivate() {
+        var searchText = {};
+        searchText["username"] = $("#username").val();
+        searchText["address"] = $("#address").val();
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "<%=contextPath%>/api/search/private",
+            data : JSON.stringify(searchText),
+            dataType : 'json',
+            timeout : 100000,
+            success : function(data) {
+                console.log("SUCCESS: ", data);
+                display(data);
+            },
+            error : function(e) {
+                console.log("ERROR: ", e);
+                display(e);
+            }
+        });
+    }
+	
 	function display(data) {
 		var json = "<h4>Ajax Response</h4><pre>"
 				+ JSON.stringify(data, null, 4) + "</pre>";

@@ -23,11 +23,13 @@
 	<mvc:interceptors>
         <!--对所有的请求记性拦截-->
         <mvc:interceptor>
+            <!-- 这里第一个配置必须是mvc:mapping，否则报错应以mvc:mapping开头 -->
+            <mvc:mapping path="/**" />
             <bean class="com.asiainfo.springmvc.interceptor.RequestLogHandlerInterceptor" />
         </mvc:interceptor>
         <!--对特定的请求进行拦截-->
         <mvc:interceptor>
-            <mvc:mapping path="/monitor/**"/>
+            <mvc:mapping path="/monitor/**" />
             <bean class="com.asiainfo.springmvc.interceptor.StopWatchHandlerInterceptor" />
         </mvc:interceptor>
 	</mvc:interceptors>

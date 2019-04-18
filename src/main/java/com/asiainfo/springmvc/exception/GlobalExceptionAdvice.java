@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * TODO
+ * controller 异常拦截
  * 
  * @author       zq
  * @date         2018年2月2日  下午5:38:22

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ConverterController {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	//converter1?username=jaesonchen&phone.areaCode=021&phone.phoneNumber=10001111
 	@RequestMapping("/converter1")
@@ -25,7 +25,6 @@ public class ConverterController {
 	public User converter1(User user, BindingResult result) {
 		
 		logger.debug("converter1() is executed, user={}", user);
-		
 		if (result.hasErrors()) {
 			logger.debug("error={}", result.getErrorCount());
 		} else {

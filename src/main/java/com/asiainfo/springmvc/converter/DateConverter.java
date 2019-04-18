@@ -38,7 +38,6 @@ public class DateConverter implements Converter<String, Date> {
 		if (StringUtils.isEmpty(source)) {
 			return null;
 		}
-		
 		DateFormat df = new SimpleDateFormat(this.pattern);
 		try {
 			return df.parse(source);

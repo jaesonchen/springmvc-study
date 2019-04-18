@@ -14,12 +14,18 @@
 
 	<mvc:annotation-driven conversion-service="conversionService" />
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
+<!-- 		<property name="converters">
 			<set>
 				<ref bean="phoneNumberConverter" />
 				<ref bean="dateConverter"/>
 			</set>
-		</property>
+		</property> -->
+		<property name="formatters">
+            <set>
+                <ref bean="phoneNumberFormatter" />
+                <ref bean="dateFormatter" />
+            </set>
+        </property>
 	</bean>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
